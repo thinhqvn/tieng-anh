@@ -69,11 +69,6 @@ footer {visibility: hidden;}
     font-size: 1.02rem;
     line-height: 1.5;
 }
-
-/* Ẩn chấm tròn radio mặc định (chỉ còn text + icon ✅/❌) */
-div.row-widget.stRadio > div[role="radiogroup"] > label > div:first-child {
-    display: none !important;
-}
 </style>
 """
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
@@ -492,7 +487,7 @@ def render_question_area():
 
     st.markdown(f"### Câu {idx + 1}/{len(qs)}")
 
-    # Câu hỏi trong khung đẹp
+    # Câu hỏi trong khung
     question_html = q["question"].replace("\n", "<br>")
     st.markdown(
         f'<div class="question-card">{question_html}</div>',
@@ -607,12 +602,12 @@ def main():
     init_session_state()
 
     st.markdown(
-        '<h1 class="main-title">🌱 Các câu hỏi cho chủ đề bảo vệ môi trường</h1>',
+        '<h1 class="main-title">🌱 Luyện tập trắc nghiệm: Bảo vệ môi trường</h1>',
         unsafe_allow_html=True,
     )
     st.markdown(
         '<p class="sub-title">Học sinh luyện tập các câu hỏi về năng lượng tái tạo, phân loại rác, '
-        'thói quen xanh và kiến thức môi trường.</p>',
+        'thói quen xanh và kiến thức môi trường – có đồng hồ đếm ngược và bảng điểm.</p>',
         unsafe_allow_html=True,
     )
 
