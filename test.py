@@ -602,12 +602,12 @@ def main():
     init_session_state()
 
     st.markdown(
-        '<h1 class="main-title">🌱 Luyện tập trắc nghiệm: Bảo vệ môi trường</h1>',
+        '<h1 class="main-title">🌱 Các câu hỏi cho chủ đề bảo vệ môi trường</h1>',
         unsafe_allow_html=True,
     )
     st.markdown(
         '<p class="sub-title">Học sinh luyện tập các câu hỏi về năng lượng tái tạo, phân loại rác, '
-        'thói quen xanh và kiến thức môi trường – có đồng hồ đếm ngược và bảng điểm.</p>',
+        'thói quen xanh và kiến thức môi trường.</p>',
         unsafe_allow_html=True,
     )
 
