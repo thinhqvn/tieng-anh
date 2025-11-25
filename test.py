@@ -7,8 +7,8 @@ QUIZ_DURATION_MINUTES = 30
 QUIZ_DURATION_SECONDS = QUIZ_DURATION_MINUTES * 60
 
 st.set_page_config(
-    page_title="Luyện tập tiếng Anh 9 - I Learn Smart World",
-    page_icon="📘",
+    page_title="Luyện tập: Bảo vệ môi trường",
+    page_icon="🌱",
     layout="wide",
 )
 
@@ -25,11 +25,11 @@ CUSTOM_CSS = """
     background-color: #f3f4f6;
 }
 
-/* Ẩn menu và footer nếu muốn gọn gàng */
+/* Ẩn menu và footer để gọn gàng */
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 
-/* Thẻ scoreboard */
+/* Thẻ scoreboard (4 ô trên đầu) */
 .score-box {
     background-color: rgba(255, 255, 255, 0.96);
     padding: 1rem 1.5rem;
@@ -57,7 +57,20 @@ footer {visibility: hidden;}
     font-weight: 700;
 }
 
-/* Ẩn chấm tròn radio trong phần lựa chọn đáp án */
+/* Khung hiển thị CÂU HỎI */
+.question-card {
+    background-color: rgba(255, 255, 255, 0.96);
+    padding: 1.25rem 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+    border: 1px solid #e5e7eb;
+    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.02rem;
+    line-height: 1.5;
+}
+
+/* Ẩn chấm tròn radio mặc định (chỉ còn text + icon ✅/❌) */
 div.row-widget.stRadio > div[role="radiogroup"] > label > div:first-child {
     display: none !important;
 }
@@ -65,152 +78,186 @@ div.row-widget.stRadio > div[role="radiogroup"] > label > div:first-child {
 """
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
-# ================== NGÂN HÀNG CÂU HỎI (MẪU) ==================
-# Đây là câu hỏi minh hoạ, không lấy nguyên văn từ sách.
+# ================== NGÂN HÀNG CÂU HỎI: BẢO VỆ MÔI TRƯỜNG ==================
+# Chỉ là câu hỏi kiến thức môi trường, không phân loại Grammar/Reading
 QUESTION_BANK = [
-    # UNIT 1 - Vocabulary
     {
-        "unit": 1,
-        "skill": "Vocabulary",
-        "question": "Choose the best word to complete the sentence:\n\n"
-                    "My sister is very ____. She often helps her friends with homework.",
-        "options": ["shy", "selfish", "helpful", "lazy"],
+        "question": "Which of the following is a type of renewable energy?",
+        "options": ["Coal power", "Oil power", "Solar power", "Diesel power"],
         "answer_index": 2,
-        "explanation": "‘Helpful’ means willing to help others."
+        "explanation": "Solar power comes from the sun and can be replaced naturally."
     },
     {
-        "unit": 1,
-        "skill": "Vocabulary",
-        "question": "Choose the word that is CLOSEST in meaning to ‘intelligent’.",
-        "options": ["clever", "boring", "noisy", "careless"],
-        "answer_index": 0,
-        "explanation": "‘Clever’ is similar in meaning to ‘intelligent’."
-    },
-    # UNIT 1 - Grammar
-    {
-        "unit": 1,
-        "skill": "Grammar",
-        "question": "Choose the correct sentence.",
-        "options": [
-            "She don’t like playing badminton.",
-            "She doesn’t likes playing badminton.",
-            "She doesn’t like playing badminton.",
-            "She not like playing badminton."
-        ],
+        "question": "Which source of energy is NOT renewable?",
+        "options": ["Wind", "Hydropower", "Natural gas", "Solar"],
         "answer_index": 2,
-        "explanation": "With ‘she’, we use ‘doesn’t + bare verb’: doesn’t like."
+        "explanation": "Natural gas is a fossil fuel and cannot be replaced quickly."
     },
     {
-        "unit": 1,
-        "skill": "Grammar",
-        "question": "Choose the correct verb form:\n\n"
-                    "They ____ to school every day.",
-        "options": ["go", "goes", "is going", "going"],
-        "answer_index": 0,
-        "explanation": "‘They’ + V (present simple): go."
-    },
-    # UNIT 1 - Reading
-    {
-        "unit": 1,
-        "skill": "Reading",
-        "question": "Read the text and answer the question:\n\n"
-                    "Minh lives in a small town. Every morning, he gets up at 6 a.m., "
-                    "has breakfast with his family, and then walks to school. It takes "
-                    "him about fifteen minutes to get there.\n\n"
-                    "Question: How does Minh go to school?",
-        "options": ["By bus", "On foot", "By bike", "By car"],
-        "answer_index": 1,
-        "explanation": "‘walks to school’ → he goes on foot."
-    },
-    {
-        "unit": 1,
-        "skill": "Reading",
-        "question": "According to the text about Minh, when does he get up?",
-        "options": ["At 5 a.m.", "At 6 a.m.", "At 6:30 a.m.", "At 7 a.m."],
-        "answer_index": 1,
-        "explanation": "The text says: ‘he gets up at 6 a.m.’"
-    },
-    # UNIT 2 - Vocabulary
-    {
-        "unit": 2,
-        "skill": "Vocabulary",
-        "question": "Choose the best word to complete the sentence:\n\n"
-                    "Air ____ is becoming a serious problem in big cities.",
-        "options": ["pollution", "population", "tradition", "education"],
-        "answer_index": 0,
-        "explanation": "The correct phrase is ‘air pollution’."
-    },
-    {
-        "unit": 2,
-        "skill": "Vocabulary",
-        "question": "Choose the word that is OPPOSITE in meaning to ‘modern’.",
-        "options": ["ancient", "crowded", "expensive", "quiet"],
-        "answer_index": 0,
-        "explanation": "‘Ancient’ means very old, opposite of ‘modern’."
-    },
-    # UNIT 2 - Grammar
-    {
-        "unit": 2,
-        "skill": "Grammar",
-        "question": "Choose the correct sentence using ‘used to’.",
+        "question": "Which daily habit helps reduce plastic waste the MOST?",
         "options": [
-            "I used to play football when I am a child.",
-            "I use to play football when I was a child.",
-            "I used play football when I was a child.",
-            "I used to play football when I was a child."
-        ],
-        "answer_index": 3,
-        "explanation": "Structure: used to + V (past habit)."
-    },
-    {
-        "unit": 2,
-        "skill": "Grammar",
-        "question": "Choose the correct verb:\n\n"
-                    "People ____ recycle more to protect the environment.",
-        "options": ["should", "mustn’t", "can’t", "did"],
-        "answer_index": 0,
-        "explanation": "‘should’ expresses advice: should recycle more."
-    },
-    # UNIT 2 - Reading
-    {
-        "unit": 2,
-        "skill": "Reading",
-        "question": "Read the text and answer the question:\n\n"
-                    "Many students ride their bikes to school instead of using motorbikes. "
-                    "This helps reduce air pollution and keeps them healthy.\n\n"
-                    "Question: Why do students ride their bikes to school?",
-        "options": [
-            "Because it is more expensive.",
-            "To reduce air pollution and stay healthy.",
-            "Because they don’t like motorbikes.",
-            "Because there are no buses."
+            "Buying a new plastic bottle every day",
+            "Using a reusable water bottle",
+            "Throwing plastic into the general bin",
+            "Burning plastic at home"
         ],
         "answer_index": 1,
-        "explanation": "The text states both reasons: reduce pollution and keep healthy."
+        "explanation": "Reusable bottles replace many single-use plastic bottles."
     },
     {
-        "unit": 2,
-        "skill": "Reading",
-        "question": "According to the text, which statement is TRUE?",
+        "question": "Which item should go into the \"organic waste\" bin?",
+        "options": ["A glass bottle", "Vegetable peels", "An old battery", "A broken phone"],
+        "answer_index": 1,
+        "explanation": "Vegetable peels can rot and become compost, so they are organic waste."
+    },
+    {
+        "question": "Which kind of waste should be put into the \"e-waste\" collection box?",
+        "options": ["Banana skins", "Old newspapers", "Broken mobile phones", "Glass bottles"],
+        "answer_index": 2,
+        "explanation": "E-waste includes old electronic devices like phones and computers."
+    },
+    {
+        "question": "Which item should go into the \"paper recycling\" bin?",
+        "options": ["An empty can", "A cardboard box", "A plastic straw", "A glass cup"],
+        "answer_index": 1,
+        "explanation": "Cardboard is made from paper and can be recycled with paper."
+    },
+    {
+        "question": "Which phrase best describes \"waste separation\"?",
         "options": [
-            "Riding bikes is bad for students’ health.",
-            "Using motorbikes is the only way to go to school.",
-            "Riding bikes can help protect the environment.",
-            "All students must walk to school."
+            "Mixing all types of rubbish together",
+            "Burning rubbish in the garden",
+            "Sorting rubbish into different groups before throwing it away",
+            "Hiding rubbish under the ground"
         ],
         "answer_index": 2,
-        "explanation": "The text says riding bikes helps reduce air pollution."
+        "explanation": "Waste separation means sorting rubbish into groups like paper, plastic and organic."
+    },
+    {
+        "question": "Which of the following is the BEST way to save electricity at home?",
+        "options": [
+            "Leaving the TV on all night",
+            "Turning off lights when leaving a room",
+            "Using more air conditioners",
+            "Opening the fridge many times"
+        ],
+        "answer_index": 1,
+        "explanation": "Turning off lights when not needed helps reduce electricity use."
+    },
+    {
+        "question": "What is the main gas that causes the greenhouse effect?",
+        "options": ["Oxygen (O2)", "Nitrogen (N2)", "Carbon dioxide (CO2)", "Hydrogen (H2)"],
+        "answer_index": 2,
+        "explanation": "Carbon dioxide is one of the main greenhouse gases warming the Earth."
+    },
+    {
+        "question": "What do we call the total amount of CO2 that a person or activity produces?",
+        "options": ["Green zone", "Carbon footprint", "Ozone layer", "Climate line"],
+        "answer_index": 1,
+        "explanation": "Carbon footprint is the total amount of carbon dioxide produced."
+    },
+    {
+        "question": "Which of these actions directly reduces air pollution from transport?",
+        "options": [
+            "Driving alone in a car every day",
+            "Carpooling with friends",
+            "Buying a bigger car",
+            "Leaving the engine on while waiting"
+        ],
+        "answer_index": 1,
+        "explanation": "Carpooling means fewer cars on the road and less air pollution."
+    },
+    {
+        "question": "Which habit helps save water most effectively?",
+        "options": [
+            "Taking very long showers",
+            "Letting the tap run while brushing teeth",
+            "Fixing leaking taps quickly",
+            "Washing a small number of clothes many times"
+        ],
+        "answer_index": 2,
+        "explanation": "Fixing leaks prevents a lot of water from being wasted."
+    },
+    {
+        "question": "Which of the following is an example of wind energy?",
+        "options": [
+            "A coal power plant",
+            "A wind farm with many turbines",
+            "A gas stove in the kitchen",
+            "A petrol generator"
+        ],
+        "answer_index": 1,
+        "explanation": "A wind farm uses moving air to turn turbines and make electricity."
+    },
+    {
+        "question": "Hydropower mainly uses the energy of ______ to make electricity.",
+        "options": ["moving water", "sunlight", "hot rocks", "natural gas"],
+        "answer_index": 0,
+        "explanation": "Hydropower plants use the force of moving water."
+    },
+    {
+        "question": "Geothermal energy comes from ______.",
+        "options": [
+            "the heat inside the Earth",
+            "the light of the Moon",
+            "the wind in the mountains",
+            "the waves in the sea"
+        ],
+        "answer_index": 0,
+        "explanation": "Geothermal energy is heat stored under the Earth's surface."
+    },
+    {
+        "question": "A city produced 200,000 tons of household waste last year. 25 percent of this waste was recycled. How many tons were recycled?",
+        "options": ["25,000 tons", "50,000 tons", "100,000 tons", "150,000 tons"],
+        "answer_index": 1,
+        "explanation": "25% of 200,000 is 50,000 tons."
+    },
+    {
+        "question": "The same city produced 200,000 tons of waste and recycled 25 percent. How many tons went to landfill?",
+        "options": ["50,000 tons", "100,000 tons", "150,000 tons", "200,000 tons"],
+        "answer_index": 2,
+        "explanation": "If 25% is recycled, 75% goes to landfill: 75% of 200,000 is 150,000 tons."
+    },
+    {
+        "question": "Planting more trees in a city mainly helps to ______.",
+        "options": [
+            "make the air cleaner",
+            "increase traffic jams",
+            "create more plastic waste",
+            "make the city noisier"
+        ],
+        "answer_index": 0,
+        "explanation": "Trees absorb CO2 and release oxygen, improving air quality."
+    },
+    {
+        "question": "Which action at the supermarket is the MOST environmentally friendly?",
+        "options": [
+            "Using a new plastic bag every time",
+            "Bringing your own cloth bag",
+            "Taking two plastic bags for each item",
+            "Asking for extra plastic bags"
+        ],
+        "answer_index": 1,
+        "explanation": "Cloth bags can be reused many times and reduce plastic waste."
+    },
+    {
+        "question": "Which product label shows that a plastic bottle can be recycled?",
+        "options": [
+            "A picture of a tree",
+            "A green star",
+            "A triangle of three chasing arrows",
+            "A picture of a car"
+        ],
+        "answer_index": 2,
+        "explanation": "The triangle of three arrows is the universal recycling symbol."
     },
 ]
 
-SKILLS = ["Vocabulary", "Grammar", "Reading", "Mixed"]
 MODES = ["Practice", "Test"]
 
 # ================== HÀM HỖ TRỢ ==================
 def init_session_state():
     defaults = {
-        "unit": 1,
-        "skill": "Vocabulary",
         "mode": "Practice",
         "quiz_questions": [],
         "answers": [],
@@ -222,31 +269,22 @@ def init_session_state():
         "start_time": None,
         "quiz_run_id": 0,
         "just_submitted_msg": "",
+        "scroll_to_questions": False,
     }
     for k, v in defaults.items():
         if k not in st.session_state:
             st.session_state[k] = v
 
 
-def filter_questions(unit, skill):
-    if skill == "Mixed":
-        candidates = [q for q in QUESTION_BANK if q["unit"] == unit]
-    else:
-        candidates = [q for q in QUESTION_BANK if q["unit"] == unit and q["skill"] == skill]
-    return candidates
-
-
-def start_quiz(unit, skill, mode, num_questions=10):
-    candidates = filter_questions(unit, skill)
-    if not candidates:
-        st.warning("Chưa có câu hỏi cho Unit/Skill này. Vui lòng chọn Unit hoặc Skill khác.")
+def start_quiz(mode: str, num_questions: int):
+    """Khởi tạo bài mới khi bấm START."""
+    if not QUESTION_BANK:
+        st.error("Chưa có câu hỏi trong ngân hàng.")
         return
 
-    n = min(num_questions, len(candidates))
-    quiz_qs = random.sample(candidates, n)
+    n = min(num_questions, len(QUESTION_BANK))
+    quiz_qs = random.sample(QUESTION_BANK, n)
 
-    st.session_state["unit"] = unit
-    st.session_state["skill"] = skill
     st.session_state["mode"] = mode
     st.session_state["quiz_questions"] = quiz_qs
     st.session_state["answers"] = [
@@ -260,6 +298,7 @@ def start_quiz(unit, skill, mode, num_questions=10):
     st.session_state["start_time"] = datetime.now()
     st.session_state["quiz_run_id"] += 1
     st.session_state["just_submitted_msg"] = ""
+    st.session_state["scroll_to_questions"] = True  # báo hiệu cần cuộn xuống
 
 
 def get_remaining_time():
@@ -277,7 +316,7 @@ def format_time(seconds):
 
 
 def finish_quiz():
-    """Kết thúc bài (hết giờ hoặc bấm kết thúc)."""
+    """Kết thúc bài (hết giờ hoặc bấm Kết thúc)."""
     if st.session_state["quiz_finished"]:
         return
 
@@ -301,7 +340,7 @@ def finish_quiz():
         st.session_state["score"] = score
         st.session_state["answered_count"] = answered_count
     else:
-        # Practice mode: score đã được cộng dần, chỉ cần đếm lại số câu đã trả lời
+        # Practice: score đã cộng dần, chỉ đếm số câu đã trả lời
         answered_count = sum(1 for a in ans if a["selected"] is not None)
         st.session_state["answered_count"] = answered_count
 
@@ -326,26 +365,24 @@ def render_scoreboard():
     remaining_secs = get_remaining_time()
     time_str = format_time(remaining_secs)
 
-    unit = st.session_state["unit"]
-    skill = st.session_state["skill"]
     mode = st.session_state["mode"]
     score = st.session_state["score"]
     answered = st.session_state["answered_count"]
 
     col1, col2, col3, col4 = st.columns(4)
 
-    # Ô Unit & Skill
+    # Chủ đề & chế độ
     with col1:
         card_html = f"""
         <div class="score-box">
-            <div><b>🧩 Unit &amp; Skill</b></div>
-            <div><strong>Unit {unit}</strong> – <em>{skill}</em></div>
-            <div>Mode: <strong>{mode}</strong></div>
+            <div><b>🌱 Chủ đề</b></div>
+            <div><strong>Bảo vệ môi trường</strong></div>
+            <div>Chế độ: <strong>{mode}</strong></div>
         </div>
         """
         st.markdown(card_html, unsafe_allow_html=True)
 
-    # Ô Điểm hiện tại
+    # Điểm
     with col2:
         card_html = f"""
         <div class="score-box">
@@ -357,7 +394,7 @@ def render_scoreboard():
         """
         st.markdown(card_html, unsafe_allow_html=True)
 
-    # Ô Số câu đã làm
+    # Số câu đã làm
     with col3:
         card_html = f"""
         <div class="score-box">
@@ -369,7 +406,7 @@ def render_scoreboard():
         """
         st.markdown(card_html, unsafe_allow_html=True)
 
-    # Ô Thời gian còn lại
+    # Thời gian còn lại
     with col4:
         card_html = f"""
         <div class="score-box">
@@ -387,15 +424,32 @@ def render_scoreboard():
         finish_quiz()
 
 
+def scroll_to_question_section():
+    """Sau khi bấm START, cuộn xuống vùng câu hỏi."""
+    if st.session_state.get("scroll_to_questions"):
+        st.markdown(
+            """
+            <script>
+            const q = document.getElementById("question-section");
+            if (q) {
+                q.scrollIntoView({behavior: "smooth", block: "start"});
+            }
+            </script>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.session_state["scroll_to_questions"] = False
+
+
 def render_question_area():
     qs = st.session_state["quiz_questions"]
     ans = st.session_state["answers"]
 
     if not qs:
-        st.info("Hãy chọn Unit, Skill và bấm **Bắt đầu** để luyện tập.")
+        st.info("Hãy bấm nút **START** để bắt đầu bài luyện tập về bảo vệ môi trường.")
         return
 
-    # Nếu đã kết thúc bài → hiển thị kết quả tổng
+    # Nếu đã kết thúc bài
     if st.session_state["quiz_finished"]:
         st.subheader("🎉 Kết quả bài luyện tập")
         total_q = len(qs)
@@ -415,7 +469,6 @@ def render_question_area():
             is_correct = ans[i]["is_correct"]
             result_rows.append({
                 "Câu": i + 1,
-                "Kỹ năng": q["skill"],
                 "Bạn chọn": selected_text,
                 "Đáp án đúng": correct_text,
                 "Kết quả": "Đúng" if is_correct else "Sai",
@@ -426,7 +479,7 @@ def render_question_area():
             st.dataframe(result_rows, hide_index=True)
         return
 
-    # 👉 Thông báo nhỏ cho chế độ Test sau khi lưu đáp án
+    # Thông báo nhỏ cho Test mode
     msg = st.session_state.get("just_submitted_msg", "")
     if msg:
         st.info(msg)
@@ -437,34 +490,36 @@ def render_question_area():
     q = qs[idx]
     answer_state = ans[idx]
 
-    st.markdown(f"### Câu {idx + 1}/{len(qs)} – {q['skill']}")
-    st.write(q["question"])
+    st.markdown(f"### Câu {idx + 1}/{len(qs)}")
+
+    # Câu hỏi trong khung đẹp
+    question_html = q["question"].replace("\n", "<br>")
+    st.markdown(
+        f'<div class="question-card">{question_html}</div>',
+        unsafe_allow_html=True,
+    )
 
     raw_options = q["options"]
     display_options = list(raw_options)
 
-    # Nếu đang ở Practice và câu này đã được nộp → gắn icon vào label
+    # Gắn icon cho Practice mode nếu câu đã nộp
     if st.session_state["mode"] == "Practice" and answer_state["selected"] is not None:
         sel_idx = answer_state["selected"]
         correct_idx = q["answer_index"]
         for i, opt in enumerate(raw_options):
             suffix = ""
             if sel_idx == correct_idx:
-                # Làm đúng → chỉ tick chỗ được chọn
                 if i == sel_idx:
                     suffix = " ✅"
             else:
-                # Làm sai → cross chỗ chọn sai, tick chỗ đúng
                 if i == sel_idx:
                     suffix = " ❌"
                 if i == correct_idx:
                     suffix = " ✅"
             display_options[i] = opt + suffix
 
-    # Tạo danh sách option cho radio (thêm dòng "-- Chọn đáp án --" ở đầu)
     options = ["-- Chọn đáp án --"] + display_options
 
-    # Vị trí mặc định của con trỏ radio
     if answer_state["selected"] is None:
         default_index = 0
     else:
@@ -482,10 +537,10 @@ def render_question_area():
     if selected_label != "-- Chọn đáp án --":
         selected_index = options.index(selected_label) - 1
 
-    # ================== HÀNG NÚT ĐIỀU KHIỂN ==================
+    # ================== HÀNG NÚT ==================
     col_btn1, col_btn2, col_btn3 = st.columns(3)
 
-    # 🔹 Nút Nộp câu trả lời (Practice + Test)
+    # Nộp câu trả lời
     with col_btn1:
         if st.button("✅ Nộp câu trả lời", key=f"submit_{idx}"):
             if selected_index is None:
@@ -498,7 +553,6 @@ def render_question_area():
                 answer_state["selected"] = selected_index
 
                 if st.session_state["mode"] == "Practice":
-                    # Chấm luôn
                     if selected_index == q["answer_index"]:
                         answer_state["is_correct"] = True
                         if first_time_submit:
@@ -506,27 +560,18 @@ def render_question_area():
                     else:
                         answer_state["is_correct"] = False
 
-                    # Rerun để vẽ lại icon ✅ / ❌ trên đáp án ngay lập tức
                     st.rerun()
-
                 else:
-                    # ===== MODE TEST =====
-                    # Không show đúng/sai, chỉ lưu + auto skip
                     st.session_state["just_submitted_msg"] = (
                         f"✅ Đã lưu đáp án cho câu {idx + 1}."
                     )
-
                     if idx < len(qs) - 1:
-                        # Chuyển sang câu kế tiếp
                         go_next()
                     else:
-                        # Câu cuối thì nộp bài
                         finish_quiz()
-
-                    # Rerun để hiển thị câu mới + dòng "Đã lưu..."
                     st.rerun()
 
-    # 🔹 Nút Câu trước / Câu tiếp
+    # Câu trước / Câu tiếp
     with col_btn2:
         st.button(
             "⬅ Câu trước",
@@ -543,13 +588,11 @@ def render_question_area():
             on_click=go_next,
         )
 
-    # 🔹 Feedback thêm cho Practice
+    # Feedback Practice
     if st.session_state["mode"] == "Practice" and answer_state["selected"] is not None:
         if answer_state["is_correct"] is True:
-            # Đúng: chỉ hiện báo đúng, KHÔNG có giải thích
             st.success("🎯 Chính xác! Rất tốt!")
         elif answer_state["is_correct"] is False:
-            # Sai: hiện báo sai + giải thích
             correct_text = raw_options[q["answer_index"]]
             st.error(f"❌ Chưa chính xác. Đáp án đúng là: **{correct_text}**")
             st.info(f"Giải thích: {q['explanation']}")
@@ -559,37 +602,53 @@ def render_question_area():
         finish_quiz()
 
 
-
 # ================== GIAO DIỆN CHÍNH ==================
 def main():
     init_session_state()
 
     st.markdown(
-        '<h1 class="main-title">📘 Luyện tập tiếng Anh 9 – I Learn Smart World</h1>',
+        '<h1 class="main-title">🌱 Các câu hỏi cho chủ đề bảo vệ môi trường</h1>',
         unsafe_allow_html=True,
     )
     st.markdown(
-        '<p class="sub-title">Web luyện trắc nghiệm giúp học sinh ôn tập sau giờ học: '
-        'bám sát từng Unit, kỹ năng Vocabulary – Grammar – Reading, có bảng điểm và đồng hồ đếm ngược.</p>',
+        '<p class="sub-title">Học sinh luyện tập các câu hỏi về năng lượng tái tạo, phân loại rác, '
+        'thói quen xanh và kiến thức môi trường.</p>',
         unsafe_allow_html=True,
     )
 
-    # Sidebar: cấu hình bài luyện
-    st.sidebar.header("🧩 Nội dung tập luyện")
-    unit = st.sidebar.selectbox("Chọn Unit", options=list(range(1, 11)), index=0)
-    skill = st.sidebar.selectbox("Chọn kỹ năng", options=SKILLS, index=0)
-    mode = st.sidebar.radio("Chế độ làm bài", options=MODES, index=0)
-    num_q = st.sidebar.slider("Số câu trong bài", min_value=5, max_value=20, value=10, step=1)
+    st.markdown("### ⚙️ Cài đặt bài luyện tập")
 
-    st.sidebar.markdown("---")
-    if st.sidebar.button("🚀 Bắt đầu / Làm lại bài"):
-        start_quiz(unit, skill, mode, num_questions=num_q)
+    col_left, col_right = st.columns([2, 1])
 
-    # Hiển thị scoreboard nếu đã có bài
+    with col_left:
+        mode_choice = st.radio(
+            "Chọn chế độ làm bài:",
+            MODES,
+            index=0,
+            horizontal=True,
+        )
+        max_q = len(QUESTION_BANK)
+        num_q = st.slider(
+            "Số câu hỏi trong bài:",
+            min_value=5,
+            max_value=max_q,
+            value=min(10, max_q),
+            step=1,
+        )
+
+    with col_right:
+        st.write("")
+        st.write("")
+        if st.button("🚀 START / LÀM LẠI BÀI", use_container_width=True):
+            start_quiz(mode_choice, num_q)
+
     if st.session_state["quiz_questions"]:
         render_scoreboard()
 
-    # Vùng câu hỏi chính
+    # Anchor cho phần câu hỏi + auto scroll
+    st.markdown('<div id="question-section"></div>', unsafe_allow_html=True)
+    scroll_to_question_section()
+
     render_question_area()
 
 
